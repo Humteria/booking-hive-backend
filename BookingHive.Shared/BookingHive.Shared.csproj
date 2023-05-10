@@ -6,4 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="DataTransferObjects\" />
+    <Folder Include="Mappings\" />
+    <Folder Include="Converters\" />
+  </ItemGroup>
+
 </Project>
