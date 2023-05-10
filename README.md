@@ -1,7 +1,12 @@
 <div align=center>
     <h1>⬢⬡ BookingHive Backend</h1>
-    <p>This repository holds the backend code for the <a href=https://github.com/Humteria/booking-hive>BookingHive Platform</a></p>
+
+![Build Status](https://img.shields.io/github/actions/workflow/status/baltermia/blazor-camera-streamer/dotnet.yml?style=flat-square)
+
+This repository holds the backend code for the [BookingHive Platform](ttps://github.com/Humteria/booking-hive)
 </div>
+
+---
 
 The Backend provides the API which the [frontend](https://github.com/Humteria/booking-hive-frontend) uses. It also holds all of the dependant Services.
 
