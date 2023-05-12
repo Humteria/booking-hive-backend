@@ -17,5 +17,6 @@ RUN dotnet publish "BookingHive.Api.csproj" -c Release -o /app/publish /p:UseApp
 
 FROM base AS final
 WORKDIR /app
+ENV ASPNETCORE_URLS=https://+:5010;http://+:5010
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "BookingHive.Api.dll"]
