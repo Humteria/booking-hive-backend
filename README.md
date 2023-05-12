@@ -1,5 +1,6 @@
+![alt text](https://github.com/Humteria/booking-hive/blob/main/BookingHiveDocBanner.png?raw=true)
 <div align=center>
-    <h1>⬢⬡ BookingHive Backend</h1>
+    <h1>⬢⬡ Backend</h1>
 
 ![Build Status](https://img.shields.io/github/actions/workflow/status/baltermia/blazor-camera-streamer/dotnet.yml?style=flat-square)
 
