@@ -1,0 +1,11 @@
+version: "4.19"
+
+services:
+  api:
+    image: api
+    build: ./BookingHive.Api/Dockerfile
+    ports:
+      - 2010:443
+      - 2020:80
+    volumes:
+      - /app
