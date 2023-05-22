@@ -1,4 +1,4 @@
-﻿using BookingHive.Data.Models.Accounts.Users;
+﻿using BookingHive.Data.Models.Accounts;
 
 namespace BookingHive.Data.Models.Service;
 
