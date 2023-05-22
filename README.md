@@ -2,7 +2,7 @@
 <div align=center>
     <h1>⬢⬡ Backend</h1>
 
-![Build Status](https://img.shields.io/github/actions/workflow/status/baltermia/blazor-camera-streamer/dotnet.yml?style=flat-square)
+![Build Status](https://img.shields.io/github/actions/workflow/status/humteria/booking-hive-backend/dotnet.yml?style=flat-square)
 
 This repository holds the backend code for the [BookingHive Platform](ttps://github.com/Humteria/booking-hive)
 </div>
