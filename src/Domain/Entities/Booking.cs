@@ -4,5 +4,5 @@ public class Booking : BaseAuditableEntity
 {
     public Service? Service { get; set; }
 
-    public DateTime Time { get; set; }
+    public DateTime BookingTime { get; set; }
 }

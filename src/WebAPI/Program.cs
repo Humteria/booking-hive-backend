@@ -1,4 +1,6 @@
 using BookingHive.Infrastructure.Persistence;
+using NSwag.Generation.Processors.Security;
+using NSwag;
 
 namespace WebAPI;
 
