@@ -6,6 +6,7 @@ using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using NSwag;
 using NSwag.Generation.Processors.Security;
+using ZymLabs.NSwag.FluentValidation;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
@@ -32,15 +33,23 @@ public static class ConfigureServices
         services.AddFluentValidationAutoValidation()
                 .AddFluentValidationClientsideAdapters();
 
-        services.AddRazorPages();
+        services.AddScoped(provider =>
+            new FluentValidationSchemaProcessor(provider,
+                                                provider.GetService<IEnumerable<FluentValidationRule>>(),
+                                                provider.GetService<ILoggerFactory>()));
 
         // Customise default API behaviour
         services.Configure<ApiBehaviorOptions>(options =>
             options.SuppressModelStateInvalidFilter = true);
 
-        services.AddOpenApiDocument(configure =>
+        services.AddOpenApiDocument((configure, serviceProvider) =>
         {
-            configure.Title = "Test API";
+            // Add the fluent validations schema processor
+            configure.SchemaProcessors.Add(
+                serviceProvider.CreateScope().ServiceProvider.GetRequiredService<FluentValidationSchemaProcessor>());
+
+            configure.Title = "BookingHive API";
+
             configure.AddSecurity("JWT", Enumerable.Empty<string>(), new OpenApiSecurityScheme
             {
                 Type = OpenApiSecuritySchemeType.ApiKey,

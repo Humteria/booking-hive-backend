@@ -52,13 +52,9 @@ public class Program
         // -------------
 
         app.UseHttpsRedirection();
-        app.UseStaticFiles();
 
-        app.UseSwaggerUi3(settings =>
-        {
-            settings.Path = "/api";
-            settings.DocumentPath = "/api/specification.json";
-        });
+        app.UseOpenApi();
+        app.UseSwaggerUi3();
 
         app.UseRouting();
 
@@ -69,10 +65,6 @@ public class Program
         app.MapControllerRoute(
             name: "default",
             pattern: "{controller}/{action=Index}/{id?}");
-
-        app.MapRazorPages();
-
-        app.MapFallbackToFile("index.html");
 
         app.Run();
     }
