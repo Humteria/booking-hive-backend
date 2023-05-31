@@ -1,8 +1,9 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using BookingHive.Application.Common.Interfaces;
-using BookingHive.Application.Common.Mappings;
 using BookingHive.Application.Common.Models.DataTransferObjects;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookingHive.Application.Services.Queries.GetAllServices;
 
@@ -17,5 +18,7 @@ public class GetAllServicesQueryHandler : IRequestHandler<GetAllServicesQuery, L
 
     public Task<List<ServiceDto>> Handle(GetAllServicesQuery request, CancellationToken cancellationToken) =>
         _context.Services
-                .ProjectToListAsync<ServiceDto>(_mapper.ConfigurationProvider);
+                .AsNoTracking()
+                .ProjectTo<ServiceDto>(_mapper.ConfigurationProvider)
+                .ToListAsync(cancellationToken: cancellationToken);
 }

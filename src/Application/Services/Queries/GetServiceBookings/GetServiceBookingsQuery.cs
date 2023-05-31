@@ -1,8 +1,9 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using BookingHive.Application.Common.Interfaces;
-using BookingHive.Application.Common.Mappings;
 using BookingHive.Application.Common.Models.DataTransferObjects;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookingHive.Application.Services.Queries.GetServiceBookings;
 
@@ -19,9 +20,13 @@ public class GetServiceBookingsQueryHandler : IRequestHandler<GetServiceBookings
     public GetServiceBookingsQueryHandler(IApplicationDbContext context, IMapper mapper) => (_context, _mapper) = (context, mapper);
 
     public Task<List<BookingDto>> Handle(GetServiceBookingsQuery request, CancellationToken cancellationToken) =>
-        _context.Services
-                .Single(s => s.Id == request.ServiceId)
-                .Bookings
-                .AsQueryable()
-                .ProjectToListAsync<BookingDto>(_mapper.ConfigurationProvider);
+        Task.FromResult(
+            _context.Services
+                .AsNoTracking()
+                .Include(s => s.Bookings)
+                .SingleOrDefault(s => s.Id == request.ServiceId)
+                ?.Bookings
+                ?.AsQueryable()
+                ?.ProjectTo<BookingDto>(_mapper.ConfigurationProvider)
+                ?.ToList() ?? new List<BookingDto>());
 }
