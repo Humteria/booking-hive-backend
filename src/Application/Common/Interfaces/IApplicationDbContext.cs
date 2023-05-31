@@ -1,11 +1,13 @@
-﻿//using BookingHive.Domain.Entities;
+﻿using BookingHive.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookingHive.Application.Common.Interfaces;
 
 public interface IApplicationDbContext
 {
-    // DbSet<Entity> Entities { get; }
+    DbSet<Service> Services { get; }
+
+    DbSet<Booking> Bookings { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

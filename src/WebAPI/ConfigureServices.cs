@@ -1,4 +1,4 @@
-﻿using BookingHive.Application.Common.Interfaces;
+using BookingHive.Application.Common.Interfaces;
 using BookingHive.Infrastructure.Persistence;
 using BookingHive.WebAPI.Filters;
 using BookingHive.WebAPI.Services;
@@ -27,8 +27,10 @@ public static class ConfigureServices
         services.AddHealthChecksUI()
                 .AddInMemoryStorage();
 
-        services.AddControllersWithViews(options =>
+        services.AddControllers(options =>
             options.Filters.Add<ApiExceptionFilterAttribute>());
+
+        services.AddEndpointsApiExplorer();
 
         services.AddFluentValidationAutoValidation()
                 .AddFluentValidationClientsideAdapters();
@@ -57,7 +59,7 @@ public static class ConfigureServices
                 In = OpenApiSecurityApiKeyLocation.Header,
                 Description = "Type into the textbox: Bearer {your JWT token}."
             });
-
+        
             configure.OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("JWT"));
         });
 

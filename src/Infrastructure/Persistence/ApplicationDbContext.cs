@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 using BookingHive.Application.Common.Interfaces;
-// using BookingHive.Domain.Entities;
+using BookingHive.Domain.Entities;
 using BookingHive.Infrastructure.Identity;
 using BookingHive.Infrastructure.Persistence.Interceptors;
 using Duende.IdentityServer.EntityFramework.Options;
@@ -27,7 +27,9 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>, 
         _auditableEntitySaveChangesInterceptor = auditableEntitySaveChangesInterceptor;
     }
 
-    // public DbSet<Entity> Entities=> Set<Entity>();
+    public DbSet<Service> Services => Set<Service>();
+
+    public DbSet<Booking> Bookings => Set<Booking>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

@@ -62,9 +62,7 @@ public class Program
         app.UseIdentityServer();
         app.UseAuthorization();
 
-        app.MapControllerRoute(
-            name: "default",
-            pattern: "{controller}/{action=Index}/{id?}");
+        app.MapControllers();
 
         app.Run();
     }
