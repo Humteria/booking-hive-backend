@@ -1,4 +1,6 @@
 using BookingHive.Infrastructure.Persistence;
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 namespace WebAPI;
 
@@ -35,15 +37,24 @@ public class Program
             app.UseHsts();
         }
 
-        app.UseHealthChecks("/health");
-        app.UseHttpsRedirection();
-        app.UseStaticFiles();
-
-        app.UseSwaggerUi3(settings =>
-        {
-            settings.Path = "/api";
-            settings.DocumentPath = "/api/specification.json";
+        // Health Checks
+        app.UseHealthChecks("/health", new HealthCheckOptions 
+        {  
+            ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse 
         });
+
+        app.MapHealthChecks("/health/secure", new HealthCheckOptions
+        {
+            ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+        }).RequireAuthorization();
+
+        app.MapHealthChecksUI();
+        // -------------
+
+        app.UseHttpsRedirection();
+
+        app.UseOpenApi();
+        app.UseSwaggerUi3();
 
         app.UseRouting();
 
@@ -54,10 +65,6 @@ public class Program
         app.MapControllerRoute(
             name: "default",
             pattern: "{controller}/{action=Index}/{id?}");
-
-        app.MapRazorPages();
-
-        app.MapFallbackToFile("index.html");
 
         app.Run();
     }
