@@ -10,7 +10,7 @@ public class Service : BaseAuditableEntity
 
     public ServiceState State { get; set; }
 
-    public TimeSpan Length { get; set; }
+    public TimeSpan? Length { get; set; } = null;
 
     public IReadOnlyCollection<Booking> Bookings => _bookings.AsReadOnly();
 
