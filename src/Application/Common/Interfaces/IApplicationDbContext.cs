@@ -7,5 +7,7 @@ public interface IApplicationDbContext
 {
     DbSet<Service> Services { get; }
 
+    DbSet<Booking> Bookings { get; }
+
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

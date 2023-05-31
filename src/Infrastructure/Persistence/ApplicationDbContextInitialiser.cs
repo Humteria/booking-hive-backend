@@ -77,7 +77,7 @@ public class ApplicationDbContextInitialiser
         // Seed, if necessary
         if (!_context.Services.Any())
         {
-            Service service = new Service
+            Service service = new()
             {
                 Title = "Test Service 1",
                 Description = "Description Placeholder"
@@ -94,6 +94,9 @@ public class ApplicationDbContextInitialiser
                 Service = service,
                 BookingTime = DateTime.Now.AddMinutes(-15)
             };
+
+            _context.Bookings.Add(b1);
+            _context.Bookings.Add(b2);
 
             service.AddBooking(b1);
             service.AddBooking(b2);
