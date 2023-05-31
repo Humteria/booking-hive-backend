@@ -1,4 +1,4 @@
-﻿// using BookingHive.Domain.Entities;
+﻿using BookingHive.Domain.Entities;
 using BookingHive.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -72,23 +72,35 @@ public class ApplicationDbContextInitialiser
             }
         }
 
+        // TODO: Remove
         // Default data
         // Seed, if necessary
-        // if (!_context.Entities.Any())
-        // {
-        //     _context.Entities.Add(new Entity
-        //     {
-        //         Title = "Todo List",
-        //         Items =
-        //         {
-        //             new Entity { },
-        //             new Entity { },
-        //             new Entity { },
-        //             new Entity { }
-        //         }
-        //     });
-        // 
-        //     await _context.SaveChangesAsync();
-        // }
+        if (!_context.Services.Any())
+        {
+            Service service = new Service
+            {
+                Title = "Test Service 1",
+                Description = "Description Placeholder"
+            };
+
+            Booking b1 = new()
+            {
+                Service = service,
+                BookingTime = DateTime.Now
+            };
+
+            Booking b2 = new()
+            {
+                Service = service,
+                BookingTime = DateTime.Now.AddMinutes(-15)
+            };
+
+            service.AddBooking(b1);
+            service.AddBooking(b2);
+
+            _context.Services.Add(service);
+        
+            await _context.SaveChangesAsync();
+        }
     }
 }
