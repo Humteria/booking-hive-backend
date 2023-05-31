@@ -11,10 +11,10 @@ namespace WebAPI.Controllers.Service;
 public class ServicesController : ApiControllerBase
 {
     [HttpGet]
-    public async Task<ActionResult<List<ServiceDto>>> GetAllServices(GetAllServicesQuery query) =>
-        await Mediator.Send(query);
+    public async Task<ActionResult<List<ServiceDto>>> GetAllServices() =>
+        await Mediator.Send(new GetAllServicesQuery());
 
-    [HttpGet("bookings")]
-    public async Task<ActionResult<List<BookingDto>>> GetServiceBookings([FromQuery] GetServiceBookingsQuery query) =>
-        await Mediator.Send(query);
+    [HttpGet("bookings/{serviceId}")]
+    public async Task<ActionResult<List<BookingDto>>> GetServiceBookings([FromRoute] int serviceId) =>
+        await Mediator.Send(new GetServiceBookingsQuery { ServiceId = serviceId });
 }
