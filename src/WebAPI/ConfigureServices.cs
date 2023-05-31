@@ -27,8 +27,10 @@ public static class ConfigureServices
         services.AddHealthChecksUI()
                 .AddInMemoryStorage();
 
-        services.AddControllersWithViews(options =>
+        services.AddControllers(options =>
             options.Filters.Add<ApiExceptionFilterAttribute>());
+
+        services.AddEndpointsApiExplorer();
 
         services.AddFluentValidationAutoValidation()
                 .AddFluentValidationClientsideAdapters();

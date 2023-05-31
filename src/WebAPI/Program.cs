@@ -1,8 +1,6 @@
 using BookingHive.Infrastructure.Persistence;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using NSwag.Generation.Processors.Security;
-using NSwag;
 
 namespace WebAPI;
 
@@ -64,9 +62,7 @@ public class Program
         app.UseIdentityServer();
         app.UseAuthorization();
 
-        app.MapControllerRoute(
-            name: "default",
-            pattern: "{controller}/{action=Index}/{id?}");
+        app.MapControllers();
 
         app.Run();
     }
