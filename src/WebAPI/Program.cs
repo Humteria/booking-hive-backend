@@ -1,4 +1,6 @@
 using BookingHive.Infrastructure.Persistence;
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 namespace WebAPI;
 
@@ -35,7 +37,20 @@ public class Program
             app.UseHsts();
         }
 
-        app.UseHealthChecks("/health");
+        // Health Checks
+        app.UseHealthChecks("/health", new HealthCheckOptions 
+        {  
+            ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse 
+        });
+
+        app.MapHealthChecks("/health/secure", new HealthCheckOptions
+        {
+            ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+        }).RequireAuthorization();
+
+        app.MapHealthChecksUI();
+        // -------------
+
         app.UseHttpsRedirection();
         app.UseStaticFiles();
 

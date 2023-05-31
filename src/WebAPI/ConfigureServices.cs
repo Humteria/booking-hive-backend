@@ -19,8 +19,12 @@ public static class ConfigureServices
 
         services.AddHttpContextAccessor();
 
+        // Health Checks
         services.AddHealthChecks()
                 .AddDbContextCheck<ApplicationDbContext>();
+
+        services.AddHealthChecksUI()
+                .AddInMemoryStorage();
 
         services.AddControllersWithViews(options =>
             options.Filters.Add<ApiExceptionFilterAttribute>());
