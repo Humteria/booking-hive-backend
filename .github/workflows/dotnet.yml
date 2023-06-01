@@ -18,8 +18,8 @@ jobs:
         dotnet-version: 7.0.100
         include-prerelease: false
     - name: Restoring Nuget Packages
-      run: dotnet restore
-    - name: Builduing Project
-      run: dotnet build --no-restore
+      run: dotnet restore ./BookingHive.sln
+    - name: Builduing Projects
+      run: dotnet build --no-restore ./BookingHive.sln
     - name: Running Tests
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test --no-build --verbosity normal ./BookingHive.sln
