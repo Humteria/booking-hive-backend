@@ -1,12 +1,15 @@
-﻿using AutoMapper;
+﻿using System.Data;
+using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using BookingHive.Application.Common.Interfaces;
 using BookingHive.Application.Common.Models.DataTransferObjects;
+using BookingHive.Application.Common.Security;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookingHive.Application.Services.Queries.GetServiceBookings;
 
+[Authorize(Roles = "Administrator")]
 public record class GetServiceBookingsQuery : IRequest<List<BookingDto>>
 {
     public int ServiceId { get; init; }
