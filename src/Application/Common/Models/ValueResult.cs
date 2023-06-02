@@ -15,4 +15,7 @@ public class ValueResult<T> : Result
 
     public static ValueResult<T> Success(T value) =>
         new(Success(), value);
+
+    public static ValueResult<T> Failure(IEnumerable<string> errors) =>
+        Failure(errors);
 }
