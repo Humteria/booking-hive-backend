@@ -40,6 +40,8 @@ public static class ConfigureServices
         services.AddIdentityServer()
             .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
 
+        services.Configure<JwtSettings>(configuration.GetSection(nameof(JwtSettings)));
+
         services.AddTransient<IDateTime, DateTimeService>();
         services.AddTransient<IIdentityService, IdentityService>();
 
